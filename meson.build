@@ -1,4 +1,4 @@
-project('obs-lv2', 'cpp', license : 'GPL2+')
+project('obs-lv2', ['c', 'cpp'], license : 'GPL2+')
 
 deps =  [
   dependency('lv2', version : '>=1.16.0'),
@@ -6,15 +6,18 @@ deps =  [
   dependency('lilv-0'),
   dependency('suil-0'),
   dependency('Qt5Widgets'),
+  dependency('threads'),
 ]
 
 sources = [
+  'zix/ring.c',
   'obs-lv2.cpp',
   'ui.cpp',
   'ui_timer.cpp',
   'urid.cpp',
   'state.cpp',
   'ports.cpp',
+  'worker.cpp',
   'core.cpp',
 ]
 

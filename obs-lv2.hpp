@@ -25,6 +25,8 @@
 #include <lv2/state/state.h>
 #include <lv2/instance-access/instance-access.h>
 #include <lv2/data-access/data-access.h>
+#include <lv2/worker/worker.h>
+#include <lv2/buf-size/buf-size.h>
 #include <iostream>
 #include <functional>
 #include <stdio.h>
@@ -37,6 +39,8 @@
 #include <math.h>
 #include <vector>
 #include <algorithm>
+
+#include "worker.hpp"
 
 #define WARN printf
 
@@ -182,10 +186,16 @@ protected:
 	LV2_Extension_Data_Feature feature_data_access_data;
 	LV2_Feature feature_data_access;
 
+	LV2_Feature feature_bounded_block_lenght;
+
+	LV2Worker worker;
+	LV2_Worker_Schedule feature_worker_schedule_data;
+	LV2_Feature feature_worker_schedule;
+
 	static LV2_URID urid_map(void *handle, const char *uri);
 	static const char *urid_unmap(void *handle, LV2_URID urid);
 
-	const LV2_Feature* features[4];
+	const LV2_Feature* features[5];
 
 	/* STATE PERSISTENCE */
 	static const void *get_port_value(const char *port_symbol,
